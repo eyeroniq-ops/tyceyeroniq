@@ -69,7 +69,7 @@ const App: React.FC = () => {
             <span className="text-xl font-bold tracking-tight text-white brand-font">eyeroniq</span>
           </div>
           <div className="text-xs text-zinc-500 uppercase tracking-widest hidden sm:block">
-            Portal Legal Interactivo
+            Portal Interactivo
           </div>
         </div>
       </nav>
@@ -129,9 +129,9 @@ const App: React.FC = () => {
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
-              <span className="text-pink-400 text-sm font-semibold tracking-wider uppercase mb-1 block print-text-dark">Documento Legal</span>
+              <span className="text-pink-400 text-sm font-semibold tracking-wider uppercase mb-1 block print-text-dark">Acuerdos del Servicio</span>
               <h2 className="text-3xl font-bold text-white flex items-center gap-3 print-text-dark">
-                {currentTerms.name} <span className="text-zinc-600 font-light text-2xl print-text-dark">| Acuerdo v2.4</span>
+                {currentTerms.name}
               </h2>
             </div>
             <div className="flex gap-3">
