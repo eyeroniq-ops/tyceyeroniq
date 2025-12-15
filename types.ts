@@ -4,9 +4,14 @@ export enum ServiceType {
   SOCIAL = 'SOCIAL',
 }
 
+export interface TermItem {
+  text: string;
+  tooltip: string;
+}
+
 export interface SectionContent {
   title: string;
-  items: string[];
+  items: TermItem[];
 }
 
 export interface ServiceTerms {

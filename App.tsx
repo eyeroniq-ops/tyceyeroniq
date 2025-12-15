@@ -9,10 +9,11 @@ import {
   FileText,
   XCircle,
   ChevronRight,
-  Download
+  Download,
+  Info
 } from 'lucide-react';
 import { TERMS_DATA } from './constants';
-import { ServiceType } from './types';
+import { ServiceType, TermItem } from './types';
 import AIChat from './components/AIChat';
 
 const App: React.FC = () => {
@@ -32,6 +33,35 @@ const App: React.FC = () => {
   const handlePrint = () => {
     window.print();
   };
+
+  // Helper component for list items with tooltips
+  const ListItemWithTooltip: React.FC<{ item: TermItem; icon?: React.ReactNode; className?: string; iconColorClass?: string }> = ({ item, icon, className, iconColorClass }) => (
+    <li className={`group/item relative flex items-start gap-3 text-sm leading-relaxed transition-colors hover:bg-zinc-800/30 p-2 rounded-lg -ml-2 ${className}`}>
+      {/* Icon or Bullet */}
+      <div className={`mt-0.5 flex-shrink-0 ${iconColorClass}`}>
+        {icon || <span className="block w-1.5 h-1.5 rounded-full bg-zinc-600 mt-1.5" />}
+      </div>
+      
+      {/* Content */}
+      <div className="flex-1">
+        <span className="block">{item.text}</span>
+      </div>
+
+      {/* Info Icon & Tooltip */}
+      <div className="relative ml-2 flex-shrink-0 opacity-40 group-hover/item:opacity-100 transition-opacity no-print">
+        <Info className="w-4 h-4 text-pink-400 cursor-help" />
+        {/* Tooltip Popup */}
+        <div className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs rounded-xl shadow-xl opacity-0 group-hover/item:opacity-100 pointer-events-none transition-all duration-200 z-50 translate-y-2 group-hover/item:translate-y-0">
+          <div className="font-semibold text-pink-400 mb-1 flex items-center gap-1">
+             Ejemplo:
+          </div>
+          {item.tooltip}
+          {/* Arrow */}
+          <div className="absolute top-full right-1 w-2 h-2 bg-zinc-800 border-r border-b border-zinc-700 transform rotate-45 -translate-y-1"></div>
+        </div>
+      </div>
+    </li>
+  );
 
   return (
     <div className="min-h-screen flex flex-col bg-black selection:bg-pink-500/30">
@@ -160,12 +190,13 @@ const App: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-semibold text-white print-text-dark">{currentTerms.responsibilities.title}</h3>
                 </div>
-                <ul className="space-y-3 pl-2 border-l border-zinc-800 print-border-black">
+                <ul className="space-y-2 pl-2 border-l border-zinc-800 print-border-black">
                   {currentTerms.responsibilities.items.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-3 pl-4 text-zinc-400 text-sm leading-relaxed print-text-dark">
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-600 flex-shrink-0 print-border-black"></span>
-                      {item}
-                    </li>
+                    <ListItemWithTooltip 
+                      key={idx} 
+                      item={item} 
+                      className="text-zinc-400 print-text-dark"
+                    />
                   ))}
                 </ul>
               </section>
@@ -178,12 +209,14 @@ const App: React.FC = () => {
                   <h3 className="text-xl font-semibold text-white print-text-dark">{currentTerms.revisions.title}</h3>
                 </div>
                 <div className="bg-zinc-950/50 border border-zinc-800/50 rounded-xl p-5 print-border-black print-container">
-                  <ul className="space-y-3">
+                  <ul className="space-y-2">
                     {currentTerms.revisions.items.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-zinc-400 text-sm leading-relaxed print-text-dark">
-                        <ChevronRight className="w-4 h-4 text-amber-500/50 flex-shrink-0 mt-0.5 print-text-dark" />
-                        {item}
-                      </li>
+                      <ListItemWithTooltip 
+                        key={idx} 
+                        item={item} 
+                        className="text-zinc-400 print-text-dark"
+                        icon={<ChevronRight className="w-4 h-4 text-amber-500/50" />}
+                      />
                     ))}
                   </ul>
                 </div>
@@ -199,12 +232,14 @@ const App: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-semibold text-white print-text-dark">{currentTerms.inclusions.title}</h3>
                 </div>
-                <ul className="grid grid-cols-1 gap-3">
+                <ul className="grid grid-cols-1 gap-2">
                   {currentTerms.inclusions.items.map((item, idx) => (
-                    <li key={idx} className="bg-emerald-900/10 border border-emerald-900/20 rounded-lg p-3 text-zinc-300 text-sm flex items-start gap-3 print-border-black print-text-dark">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0 print-text-dark" />
-                      {item}
-                    </li>
+                    <ListItemWithTooltip 
+                      key={idx} 
+                      item={item} 
+                      className="bg-emerald-900/10 border border-emerald-900/20 rounded-lg text-zinc-300 print-border-black print-text-dark"
+                      icon={<CheckCircle2 className="w-4 h-4 text-emerald-500" />}
+                    />
                   ))}
                 </ul>
               </section>
@@ -216,12 +251,14 @@ const App: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-semibold text-white print-text-dark">{currentTerms.exclusions.title}</h3>
                 </div>
-                <ul className="grid grid-cols-1 gap-3">
+                <ul className="grid grid-cols-1 gap-2">
                   {currentTerms.exclusions.items.map((item, idx) => (
-                    <li key={idx} className="bg-red-900/10 border border-red-900/20 rounded-lg p-3 text-zinc-400 text-sm flex items-start gap-3 opacity-80 print-border-black print-text-dark">
-                      <XCircle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0 print-text-dark" />
-                      {item}
-                    </li>
+                    <ListItemWithTooltip 
+                      key={idx} 
+                      item={item} 
+                      className="bg-red-900/10 border border-red-900/20 rounded-lg text-zinc-400 opacity-80 print-border-black print-text-dark"
+                      icon={<XCircle className="w-4 h-4 text-red-500" />}
+                    />
                   ))}
                 </ul>
               </section>

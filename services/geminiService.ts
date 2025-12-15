@@ -8,6 +8,9 @@ export const generateAnswer = async (question: string, context: ServiceTerms): P
 
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
+  // Helper to extract text from items
+  const extractItems = (items: { text: string }[]) => items.map(i => i.text).join('; ');
+
   const systemInstruction = `
     Actúa como el asistente legal virtual de la agencia creativa "Eyeroniq".
     Tu objetivo es responder dudas de los clientes sobre los Términos y Condiciones basándote EXCLUSIVAMENTE en la información proporcionada.
@@ -15,10 +18,10 @@ export const generateAnswer = async (question: string, context: ServiceTerms): P
     Contexto del Servicio Actual: ${context.name}
     
     Información Oficial:
-    - Responsabilidades: ${context.responsibilities.items.join('; ')}
-    - Política de Cambios: ${context.revisions.items.join('; ')}
-    - Qué Hacemos: ${context.inclusions.items.join('; ')}
-    - Qué NO Hacemos: ${context.exclusions.items.join('; ')}
+    - Responsabilidades: ${extractItems(context.responsibilities.items)}
+    - Política de Cambios: ${extractItems(context.revisions.items)}
+    - Qué Hacemos: ${extractItems(context.inclusions.items)}
+    - Qué NO Hacemos: ${extractItems(context.exclusions.items)}
 
     Reglas:
     1. Sé amable, profesional y directo.
