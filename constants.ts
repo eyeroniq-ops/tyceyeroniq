@@ -97,7 +97,8 @@ export const TERMS_DATA: Record<ServiceType, ServiceTerms> = {
       items: [
         "Aprobación de la parrilla de contenidos mensual máximo 3 días antes de comenzar la primera semana del periodo.",
         "Proporcionar material crudo (fotos/videos de productos) si no se contrata sesión de fotos.",
-        "Responder a dudas operativas en menos de 24 horas para no frenar la publicación."
+        "Responder a dudas operativas en menos de 24 horas para no frenar la publicación.",
+        "Enviar y mantener actualizados los datos de contacto, así como la lista de productos, servicios y precios."
       ]
     },
     revisions: {
