@@ -23,6 +23,7 @@ export interface ServiceTerms {
   revisions: SectionContent;
   inclusions: SectionContent; // What we do
   exclusions: SectionContent; // What we don't do
+  additionalClauses?: SectionContent; // Optional extra section at the bottom
 }
 
 export interface ChatMessage {

@@ -10,7 +10,8 @@ import {
   XCircle,
   ChevronRight,
   Download,
-  Info
+  Info,
+  AlertTriangle
 } from 'lucide-react';
 import { TERMS_DATA } from './constants';
 import { ServiceType, TermItem } from './types';
@@ -265,6 +266,30 @@ const App: React.FC = () => {
             </div>
 
           </div>
+
+          {/* Additional Clauses Section (Only if present) */}
+          {currentTerms.additionalClauses && (
+            <div className="mt-10 border-t border-zinc-800 pt-8 print-border-black">
+               <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2 bg-zinc-800 rounded-lg text-orange-400 print-border-black">
+                    <AlertTriangle className="w-5 h-5 print-text-dark" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-white print-text-dark">{currentTerms.additionalClauses.title}</h3>
+                </div>
+                <div className="bg-orange-950/20 border border-orange-900/30 rounded-xl p-5 print-border-black print-container">
+                  <ul className="space-y-2">
+                    {currentTerms.additionalClauses.items.map((item, idx) => (
+                       <ListItemWithTooltip 
+                        key={idx} 
+                        item={item} 
+                        className="text-zinc-300 print-text-dark hover:bg-orange-950/30"
+                        icon={<ChevronRight className="w-4 h-4 text-orange-500" />}
+                      />
+                    ))}
+                  </ul>
+                </div>
+            </div>
+          )}
 
           {/* Sticky Acceptance Footer */}
           <div className="mt-12 pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 print-border-black">

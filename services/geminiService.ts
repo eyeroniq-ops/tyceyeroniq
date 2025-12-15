@@ -22,6 +22,7 @@ export const generateAnswer = async (question: string, context: ServiceTerms): P
     - Política de Cambios: ${extractItems(context.revisions.items)}
     - Qué Hacemos: ${extractItems(context.inclusions.items)}
     - Qué NO Hacemos: ${extractItems(context.exclusions.items)}
+    ${context.additionalClauses ? `- Cláusulas Adicionales: ${extractItems(context.additionalClauses.items)}` : ''}
 
     Reglas:
     1. Sé amable, profesional y directo.

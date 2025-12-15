@@ -187,6 +187,19 @@ export const TERMS_DATA: Record<ServiceType, ServiceTerms> = {
           tooltip: "Ej: Te damos el archivo de la tarjeta de presentación, pero tú debes llevarlo a imprimir."
         }
       ]
+    },
+    additionalClauses: {
+      title: "Cláusulas de Pausa y Cancelación",
+      items: [
+        {
+          text: "Si el proyecto se pausa o el cliente no responde por falta de información, se cobrará una comisión de reactivación.",
+          tooltip: "Ej: Si dejas el proyecto en 'stand-by' durante semanas porque te falta información, reactivarlo tendrá un costo."
+        },
+        {
+          text: "Eyeroniq se reserva el derecho de terminar el proyecto SIN REEMBOLSO si la inactividad es prolongada.",
+          tooltip: "Ej: Si pasas meses sin respondernos, cerraremos el proyecto y no se devolverá el dinero abonado."
+        }
+      ]
     }
   },
   [ServiceType.SOCIAL]: {
@@ -258,10 +271,6 @@ export const TERMS_DATA: Record<ServiceType, ServiceTerms> = {
         {
           text: "Reporte mensual de métricas y rendimiento.",
           tooltip: "Ej: Un PDF al mes mostrando cuánto crecieron los seguidores y el alcance de las publicaciones."
-        },
-        {
-          text: "Community Management básico (responder comentarios en horario laboral).",
-          tooltip: "Ej: Contestar dudas de precios o ubicación de Lunes a Viernes de 9am a 6pm."
         }
       ]
     },
